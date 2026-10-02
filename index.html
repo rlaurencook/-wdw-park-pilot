@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="theme-color" content="#0d1117" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Park Pilot" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://api.themeparks.wiki" />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <title>WDW Park Pilot v2</title>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="eyebrow">WDW PARK PILOT</div>
+      <h1 id="parkTitle">Choose a park</h1>
+    </div>
+    <button id="refreshBtn" class="iconButton" aria-label="Refresh live data">↻</button>
+  </header>
+
+  <main>
+    <section class="card hero" id="heroCard">
+      <div class="row between gap">
+        <div>
+          <div class="badge" id="urgencyBadge">READY</div>
+          <h2 id="nextRide">Enable location</h2>
+          <p id="heroReason" class="muted">Allow location and choose a park to start optimizing.</p>
+        </div>
+        <div class="metricStack">
+          <div><strong id="heroWait">—</strong><span>wait</span></div>
+          <div><strong id="heroWalk">—</strong><span>walk</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="directionsBtn" class="primary" disabled>Walking directions</button>
+        <button id="completeBtn" class="secondary" disabled>Mark ridden</button>
+      </div>
+      <div id="liveStamp" class="tiny muted"></div>
+    </section>
+
+    <section class="card controls">
+      <div class="controlRow">
+        <label for="parkSelect">Park</label>
+        <select id="parkSelect"><option value="">Loading parks…</option></select>
+      </div>
+      <div class="controlRow">
+        <label><input id="ropeDropToggle" type="checkbox" /> Rope drop mode</label>
+        <label><input id="autoRefreshToggle" type="checkbox" checked /> Auto-refresh</label>
+      </div>
+      <div class="controlRow">
+        <button id="locateBtn" class="secondary">Use my location</button>
+        <span id="locationText" class="tiny muted">Location off</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="sectionHead">
+        <div>
+          <div class="eyebrow">OPTIMIZED NEXT 4</div>
+          <h3>Touring sequence</h3>
+        </div>
+        <span id="planMeta" class="tiny muted"></span>
+      </div>
+      <div id="planList" class="planList empty">No plan yet.</div>
+    </section>
+
+    <section class="card">
+      <div class="sectionHead">
+        <div>
+          <div class="eyebrow">YOUR LIGHTNING LANES</div>
+          <h3>Reservations</h3>
+        </div>
+        <button id="addLLBtn" class="secondary compact">+ Add</button>
+      </div>
+      <div id="llList" class="list empty">No Lightning Lanes entered.</div>
+    </section>
+
+    <section class="card">
+      <div class="sectionHead">
+        <div>
+          <div class="eyebrow">LIVE PARK</div>
+          <h3>All attractions</h3>
+        </div>
+        <select id="rideSort"><option value="score">Best next</option><option value="wait">Wait</option><option value="name">Name</option></select>
+      </div>
+      <div id="rideList" class="list empty">Waiting for park data…</div>
+    </section>
+
+    <section class="card mapCard">
+      <div class="sectionHead">
+        <div>
+          <div class="eyebrow">MAP</div>
+          <h3>Where to go</h3>
+        </div>
+        <button id="recenterBtn" class="secondary compact">Recenter</button>
+      </div>
+      <div id="map"></div>
+      <p class="tiny muted">Park-level map: shows attraction pins, your live position, and an in-park pedestrian route when OpenStreetMap routing can resolve Disney walkways. <b>Walking directions</b> remains available as an Apple Maps fallback.</p>
+    </section>
+  </main>
+
+  <dialog id="llDialog">
+    <form method="dialog" id="llForm">
+      <div class="dialogHead"><h3>Add Lightning Lane</h3><button value="cancel" class="x">×</button></div>
+      <label>Attraction<select id="llRide" required></select></label>
+      <label>Type<select id="llType"><option>Multi Pass</option><option>Single Pass</option></select></label>
+      <div class="grid2"><label>Start<input id="llStart" type="datetime-local" required /></label><label>End<input id="llEnd" type="datetime-local" required /></label></div>
+      <label><input id="llUsed" type="checkbox" /> Already used</label>
+      <menu><button value="cancel" class="secondary">Cancel</button><button id="saveLL" value="default" class="primary">Save</button></menu>
+    </form>
+  </dialog>
+
+  <footer>Live wait data: ThemeParks.wiki • Park Pilot is an independent planning tool and is not affiliated with Disney.</footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
