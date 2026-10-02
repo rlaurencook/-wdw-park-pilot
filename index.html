@@ -9,11 +9,11 @@
   <meta name="apple-mobile-web-app-title" content="Park Pilot" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/icon-180.png" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-v3.css" />
   <link rel="preconnect" href="https://api.themeparks.wiki" />
   <link rel="preconnect" href="https://unpkg.com" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
-  <title>WDW Park Pilot v2</title>
+  <title>WDW Park Pilot v3</title>
 </head>
 <body>
   <header class="topbar">
@@ -41,7 +41,7 @@
         <button id="directionsBtn" class="primary" disabled>Walking directions</button>
         <button id="completeBtn" class="secondary" disabled>Mark ridden</button>
       </div>
-      <div id="liveStamp" class="tiny muted"></div>
+      <div id="liveStamp" class="tiny muted"></div><div class="tiny buildTag">Build v3 • cache-safe</div>
     </section>
 
     <section class="card controls">
@@ -119,6 +119,6 @@
   <footer>Live wait data: ThemeParks.wiki • Park Pilot is an independent planning tool and is not affiliated with Disney.</footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-  <script src="app.js"></script>
+  <script src="app-v3.js"></script>
 </body>
 </html>
